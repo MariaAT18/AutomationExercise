@@ -33,31 +33,31 @@ public class ProductSteps {
         this.controller = controller;
     }
 
-    @Given("^I navigate to Products page$")
+    @Given("^The user is in the Products page$")
     public void navigateToProductPage() {
         HomePage homePage = controller.getHomePage();
         productPage = homePage.getTopBarMenuAuthenticated().clickProductsLink();
     }
 
-    @Given("^I select a \"(.*?)\" and \"(.*?)\"$")
+    @Given("^The user chooses a \"(.*?)\" and \"(.*?)\"$")
     public void navigateToProductPageByCategory(String category, String subCategory) {
         productPage.getCategorySection().clickOnCategory(category);
         productSection = productPage.getCategorySection().clickOnSubCategory(category, subCategory);
     }
 
-    @Given("^I select the \"(.*?)\" and take note of the quantity$")
+    @Given("^The user chooses a \"(.*?)\" and take note of the quantity$")
     public void navigateToProductPageByBrand(String brand) {
         productSection = productPage.getBrandSection().clickOnBrand(brand);
     }
-
-    @Given("^I enter a valid \"(.*?)\" into Search Product search$")
+    // The user writes "<>" in the Search Product Box
+    @Given("^The user writes \"(.*?)\" in the Search Product Box$")
     public void enterAValidCriteriaIntoSearchProductSearch(String criteriaSearch) {
         criteriaSearchVerify = criteriaSearch;
         productPage.getSearchProductSection().writeCriteriaToSearch(criteriaSearch);
         productSection = productPage.getSearchProductSection().clickOnSubmitSearchButton();
     }
 
-    @Given("^I should click on View Product link of the same product$")
+    @Given("^The user press on View Product link$")
     public void clickOnViewProductLinkOfTheProductSelected() {
         Assert.assertFalse(productSection.getProductItems().isEmpty(), "product list must not be empty");
         ProductItem productItem = productSection.getProductItems().get(0);
@@ -65,7 +65,7 @@ public class ProductSteps {
         controller.setViewProductPage(viewProductPage);
     }
 
-    @Given("^I should click on Add to Cart button$")
+    @Given("^The user press the Add to Cart button$")
     public void clickOnAddToCartButton() {
         Assert.assertFalse(productSection.getProductItems().isEmpty(), "product list must not be empty");
         ProductItem productItem = productSection.getProductItems().get(0);
@@ -73,7 +73,7 @@ public class ProductSteps {
         controller.setProductCartPopUp(productCartPopUp);
     }
 
-    @Given("^I click in View Cart link of the pop up displayed$")
+    @Given("^The user press the View Cart link$")
     public void clickOnViewCartLink() {
         ProductCartPopUp productCartPopUp = controller.getProductCartPopUp();
         CartPage cartPage = productCartPopUp.clickOnViewCart();
@@ -81,7 +81,7 @@ public class ProductSteps {
         controller.setCartPage(cartPage);
     }
 
-    @Given("^I click on Continue Shopping button of the popup displayed$")
+    @Given("^The user press the Continue Shopping button$")
     public void clickOnContinueShopping() {
         ProductCartPopUp productCartPopUp = controller.getProductCartPopUp();
         Assert.assertNotNull(productCartPopUp, "cart popup was not initialized");
@@ -89,7 +89,7 @@ public class ProductSteps {
         controller.setProductCartPopUp(null);
     }
 
-    @Then("^I should see \"(.*)\" products for \"(.*?)\"$")
+    @Then("^The user sees \"(.*)\" products for \"(.*?)\"$")
     public void shouldSeeListProducts(String productCount, String productTitle) {
         Assert.assertEquals(productSection.getProductCount(), Integer.parseInt(productCount), "wrong product count");
         Assert.assertEquals(productSection.getTitleDisplaysSearchedProducts(), productTitle, "wrong page title");
@@ -111,12 +111,12 @@ public class ProductSteps {
         }
     }
 
-    @Then("^the noted quantity is equal to \"(.*?)\"$")
+    @Then("^The user verifies that the noted quantity is equal to \"(.*?)\"$")
     public void shouldTheNotedQuantityBeEqualToBrandNameCount(String brandQuantityItems) {
         Assert.assertEquals(productSection.getProductCount(), Integer.parseInt(brandQuantityItems), "wrong quantity count");
     }
-
-    @Then("^the following data should be displayed \"(.*?)\", \"(.*?)\", \"(.*?)\", \"(.*?)\", \"(.*?)\", and \"(.*?)\" in products detail page$")
+    // The user reviews the following data as
+    @Then("^The user reviews the following data as \"(.*?)\", \"(.*?)\", \"(.*?)\", \"(.*?)\", \"(.*?)\", and \"(.*?)\" in products detail page$")
     public void productDataShouldBeDisplayed(String productName, String category, String price, String availability, String condition, String brand) {
         Assert.assertEquals(viewProductPage.getTitle(), productName, "wrong product name");
         Assert.assertEquals(viewProductPage.getCategory(), category, "wrong category name");
@@ -126,7 +126,7 @@ public class ProductSteps {
         Assert.assertEquals(viewProductPage.getBrand(), brand, "wrong brand name");
     }
 
-    @Then("^I should see the product list match with the criteria searched$")
+    @Then("^The user sees the product list match with the word searched$")
     public void shouldTheUserSeeTheProductListMatchWithTheCriteriaSearched() {
         List<ProductItem> productItemList = productSection.getProductItems();
         for (ProductItem item : productItemList) {
@@ -134,7 +134,7 @@ public class ProductSteps {
         }
     }
 
-    @Then("^the product is added successfully$")
+    @Then("^The user sees a message and say Added!$")
     public void productAddedSuccessfully() {
         ProductCartPopUp productCartPopUp = controller.getProductCartPopUp();
         Assert.assertEquals(productCartPopUp.getTitlePopup(), "Added!", "wrong popup title");

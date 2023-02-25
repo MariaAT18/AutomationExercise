@@ -12,7 +12,7 @@ public class CartSteps {
     private final UIController controller;
     private CartPage cartPage;
 
-    @Then("^I add to cart with Quantity \"(.*?)\"$")
+    @Then("^The user adds to cart with Quantity \"(.*?)\"$")
     public void iAddToCartWithQuantity(String quantity) {
         ProductCartPopUp productCartPopUp = controller.getViewProductPage().addToCartWithQuantity(quantity);
         controller.setProductCartPopUp(productCartPopUp);
@@ -21,7 +21,7 @@ public class CartSteps {
     public CartSteps(UIController controller) {
         this.controller = controller;
     }
-    @Then("^the \"(.*?)\", \"(.*?)\", \"(.*?)\" and \"(.*?)\" are listed in the table$")
+    @Then("^The user sees that \"(.*?)\", \"(.*?)\", \"(.*?)\" and \"(.*?)\" are listed in the table$")
     public void shouldSeeListProducts(String productName, String price, String quantity, String total) {
         cartPage = controller.getCartPage();
         CartItem cartItem = cartPage.getTableShoppingSection().findItem(productName);

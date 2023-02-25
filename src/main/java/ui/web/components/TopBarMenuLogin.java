@@ -13,7 +13,7 @@ public class TopBarMenuLogin extends TopBarMenu {
     }
     @Override
     public boolean isInTheRightPage() {
-            return loginLink.isDisplayed();
+        return loginLink.isDisplayed();
     }
 
     public LoginPage clickLoginLink() {
