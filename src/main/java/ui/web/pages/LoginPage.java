@@ -6,14 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ui.BasePageObject;
-import ui.web.components.TopBarMenuLogin;
+import ui.web.components.TopBarMenu;
 import utils.LoggerManager;
 
 public class LoginPage extends BasePageObject {
     private static final LoggerManager log = LoggerManager.getInstance();
     // private UIController controller;
-    public TopBarMenuLogin topHeaderLogin;
-
+    public TopBarMenu topBarMenu;
 
     @FindBy(name = "email")
     WebElement emailUserTextBox;
@@ -30,7 +29,7 @@ public class LoginPage extends BasePageObject {
     public LoginPage() {
         log.info("Entering to Login Page");
         PageFactory.initElements(driver, this);
-        topHeaderLogin = new TopBarMenuLogin();
+        topBarMenu = new TopBarMenu();
         waitUntilPageObjectIsLoaded();
     }
 

@@ -36,7 +36,7 @@ public class ProductSteps {
     @Given("^the user is on the Products page$")
     public void navigateToProductPage() {
         HomePage homePage = controller.getHomePage();
-        productPage = homePage.getTopBarMenuAuthenticated().clickProductsLink();
+        productPage = homePage.getTopBarMenu().clickProductsLink();
     }
 
     @Given("^the user chooses a \"(.*?)\" and \"(.*?)\"$")
@@ -88,7 +88,8 @@ public class ProductSteps {
 
     @Then("^the user goes to the Cart page using the Cart link$")
     public void shouldClickOnCartLink() {
-        CartPage cartPage = controller.getHomePage().getTopBarMenuAuthenticated().clickCartLink();
+        // CartPage cartPage = controller.getHomePage().getTopBarMenuAuthenticated().clickCartLink();
+        CartPage cartPage = controller.getHomePage().getTopBarMenu().clickCartLink();
         controller.setCartPage(cartPage);
     }
 

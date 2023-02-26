@@ -35,7 +35,7 @@ public class LoginSteps {
 
     @Then("^the user should login into the page successfully$")
     public void verifyLoginToWebsite() {
-        boolean isLoggedInTextDisplayed = homePage.getTopBarMenuAuthenticated().isTheLogoutLinkDisplayed();
+        boolean isLoggedInTextDisplayed = homePage.getTopBarMenu().isTheLogoutLinkDisplayed();
         Assert.assertTrue(isLoggedInTextDisplayed, "Logged in as text is not displayed");
         // System.out.println(homePage.getTopBarMenuAuthenticated().getUserName());
         // System.out.println(controller.getUserName());

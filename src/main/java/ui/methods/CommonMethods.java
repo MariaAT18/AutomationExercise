@@ -1,18 +1,16 @@
 package ui.methods;
 
 import ui.PageTransporter;
-import ui.web.components.TopBarMenuAuthenticated;
+import ui.web.components.TopBarMenu;
 import utils.LoggerManager;
 
 public class CommonMethods {
     private static final LoggerManager log = LoggerManager.getInstance();
     private static final PageTransporter pageTransporter = PageTransporter.getInstance();
-    private static TopBarMenuAuthenticated topBarMenuAuthenticated = new TopBarMenuAuthenticated();
+    private static TopBarMenu topBarMenu = new TopBarMenu();
 
     public static void logout() {
         log.info("Logout of the page");
-        if (topBarMenuAuthenticated.isInTheRightPage()) {
-            topBarMenuAuthenticated.logout();
-        }
+            topBarMenu.logout();
     }
 }

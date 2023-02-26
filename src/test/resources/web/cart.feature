@@ -72,8 +72,3 @@ Feature: Cart
       | Product Name      | Number Value     |
       | Blue Top          | 0                |
       | Winter Top        | -5               |
-
-
-
-
-
