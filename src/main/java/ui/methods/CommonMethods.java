@@ -15,8 +15,4 @@ public class CommonMethods {
             topBarMenuAuthenticated.logout();
         }
     }
-
-    public static boolean isCurrentSessionLoggedIn() {
-        return topBarMenuAuthenticated.isInTheRightPage();
-    }
 }

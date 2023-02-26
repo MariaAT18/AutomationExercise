@@ -2,9 +2,9 @@
 Feature: Product
 
   Scenario Outline: A user with valid account should be able a search products by category and subcategory
-    Given The user is in the Products page
-     When The user chooses a "<Category>" and "<Subcategory>"
-     Then The user sees "<ProductCount>" products for "<ProductTitle>"
+    Given the user is on the Products page
+    When the user chooses a "<Category>" and "<Subcategory>"
+    Then the user should see "<ProductCount>" products for "<ProductTitle>"
 
     Examples:
       | Category         | Subcategory      |  ProductTitle                   |  ProductCount  |
@@ -13,10 +13,10 @@ Feature: Product
       #| Kids             | Tops & Shirts    |  KIDS - TOPS & SHIRTS PRODUCTS  |   7            |
 
   Scenario Outline: A user with valid account should be able a search products by brand
-    Given The user is in the Products page
-     When The user chooses a "<Brand Name>" and take note of the quantity
-     Then The user sees "<Product Count>" products for "<Product Title>"
-      And The user verifies that the noted quantity is equal to "<Product Count>"
+    Given the user is on the Products page
+    When the user chooses a "<Brand Name>" and take note of the quantity
+    Then the user should see "<Product Count>" products for "<Product Title>"
+    And the user should verify that the noted quantity is equal to "<Product Count>"
 
     Examples:
       | Brand Name     |  Product Count  | Product Title             |
@@ -25,10 +25,10 @@ Feature: Product
       #| Madame         |  5              | BRAND - MADAME PRODUCTS   |
 
   Scenario Outline: A user with valid account should be able a find products in Search Product search
-    Given The user is in the Products page
-     When The user writes "<Word Search>" in the Search Product Box
-     Then The user sees "<Product Count>" products for "SEARCHED PRODUCTS"
-      And The user sees the product list match with the word searched
+    Given the user is on the Products page
+    When the user searches for a "<Word Search>" product
+    Then the user should see "<Product Count>" products for "SEARCHED PRODUCTS"
+    And the user should see that the product list match with the word searched
 
     Examples:
       | Word Search     | Product Count   |
@@ -38,10 +38,10 @@ Feature: Product
       #| dress               | 9               |
 
   Scenario Outline: A user with valid account should be able to see the product detail page
-    Given The user is in the Products page
-     When The user writes "<Product Name>" in the Search Product Box
-     Then The user press on View Product link
-      And The user reviews the following data as "<Product Name>", "<Category>", "<Price>", "<Availability>", "<Condition>", and "<Brand>" in products detail page
+    Given the user is on the Products page
+    When the user searches for a "<Product Name>" product
+    And the user goes to the Product Details page using the View Product link
+    Then the user should see the following information in Product Detail page "<Product Name>", "<Category>", "<Price>", "<Availability>", "<Condition>", and "<Brand>"
 
     Examples:
       | Product Name                   | Category        | Price    | Availability | Condition  | Brand        |
@@ -50,14 +50,14 @@ Feature: Product
       #| Sleeveless Dress                | Women > Dress   | 1000     | In Stock     | New        | Madame       |
 
   Scenario Outline: A user with valid account should be able to add to cart a product
-    Given The user is in the Products page
-     When The user writes "<Product Name>" in the Search Product Box
-     Then The user press the Add to Cart button
-      And The user sees a message and say Added!
-      And The user press the Continue Shopping button
+    Given the user is on the Products page
+    When the user searches for a "<Product Name>" product
+    And the user presses the Add to Cart button
+    Then the user should see a message and say Added!
+    And the user presses the Continue Shopping button
 
     Examples:
-      | Product Name                   |
+      | Product Name                    |
       | Blue Cotton Indie Mickey Dress  |
 
 

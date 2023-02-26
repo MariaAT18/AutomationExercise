@@ -22,18 +22,18 @@ public class LoginSteps {
         // this.controller = controller;
     }
 
-    @Given("^The user is in the Login page$")
+    @Given("^the user is in the Login page$")
     public void navigateToLandingPage() {
         landingPage = pageTransporter.navigateToLandingPage();
     }
 
-    @Given("^The user logs in with her \"(.*?)\" valid account$")
+    @Given("^the user logs in with her \"(.*?)\" valid account$")
     public void loginWebSite(String userWebsite) {
         loginPage = landingPage.getTopHeader().clickLoginLink();
         homePage = loginPage.loginWithProfileUser(userWebsite);
     }
 
-    @Then("^The user login into the page successfully$")
+    @Then("^the user should login into the page successfully$")
     public void verifyLoginToWebsite() {
         boolean isLoggedInTextDisplayed = homePage.getTopBarMenuAuthenticated().isTheLogoutLinkDisplayed();
         Assert.assertTrue(isLoggedInTextDisplayed, "Logged in as text is not displayed");

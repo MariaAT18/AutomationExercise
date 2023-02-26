@@ -23,6 +23,7 @@ public class ViewProductPage extends BasePageObject {
 
     @FindBy(css="input#quantity")
     WebElement quantity;
+
     @FindBy(css="button.cart")
     WebElement addToCart;
 

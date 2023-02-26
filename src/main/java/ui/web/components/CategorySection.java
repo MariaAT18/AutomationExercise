@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import ui.BasePageObject;
 
 public class CategorySection extends BasePageObject {
-    private static final String CATEGORY_LINK_SELECTOR = "//a[contains(.,'<category>')]";
-    private static final String SUBCATEGORY_LINK_SELECTOR = "//a[contains(.,'<subcategory>')]";
+    private String categoryLinkSelector = "//a[contains(.,'<category>')]";
+    private String subcategoryLinkSelector = "//a[contains(.,'<subcategory>')]";
 
     @FindBy(xpath = "//h2[text() = 'Category']")
     WebElement titleCategory;
@@ -18,12 +18,12 @@ public class CategorySection extends BasePageObject {
     }
 
     public void clickOnCategory(String category) {
-        String categorySearch = CATEGORY_LINK_SELECTOR.replace("<category>", category);
+        String categorySearch = categoryLinkSelector.replace("<category>", category);
         driver.findElement(By.xpath(categorySearch)).click();
     }
 
     public ProductSection clickOnSubCategory(String category, String subCategory) {
-        String subCategorySearch = SUBCATEGORY_LINK_SELECTOR.replace("<subcategory>", subCategory).replace("<category>", category);
+        String subCategorySearch = subcategoryLinkSelector.replace("<subcategory>", subCategory).replace("<category>", category);
         driver.findElement(By.xpath(subCategorySearch)).click();
         return new ProductSection();
     }
