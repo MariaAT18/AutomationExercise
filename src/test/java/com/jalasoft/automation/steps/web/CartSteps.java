@@ -7,10 +7,12 @@ import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import ui.web.components.ProductCartPopUp;
 import ui.web.pages.CartPage;
+import ui.web.pages.ProductPage;
 
 public class CartSteps {
     private final UIController controller;
     private CartPage cartPage;
+    private ProductPage productPage;
 
     public CartSteps(UIController controller) {
         this.controller = controller;
@@ -44,5 +46,21 @@ public class CartSteps {
     public void productAddedShouldNotBeInShoppingCartTable(String productName) {
         CartItem cartItem = controller.getCartPage().getTableShoppingSection().findItem(productName);
         Assert.assertNull(cartItem, productName+" should not be listed in the table");
+    }
+
+    @Then("^the user should see a \"(.*?)\" message$")
+    public void shouldTheUserSeeAMessageIfThereNotAreProducts(String message) {
+        Assert.assertEquals(controller.getCartPage().getCartIsEmptyTextMessage(), message, "message displayed is incorrect");
+    }
+
+
+    @And("^the user goes to the Products page using the here link$")
+    public void shouldTheUserGoesToProductsPageFromHereLink() {
+        productPage = controller.getCartPage().getHereLink();
+    }
+
+    @And("^the user should see the \"(.*?)\" title$")
+    public void shouldTheUserIsProductsPge(String productsTitle) {
+        Assert.assertEquals(productPage.getAllProductsTitle().toLowerCase(), productsTitle.toLowerCase());
     }
 }

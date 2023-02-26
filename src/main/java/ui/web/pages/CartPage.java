@@ -10,11 +10,17 @@ import ui.web.components.TableShoppingSection;
 public class CartPage extends BasePageObject {
     private TableShoppingSection tableShoppingSection;
 
-    @FindBy(css="div.breadcrumbs li.active")
+    @FindBy(css = "div.breadcrumbs li.active")
     WebElement shoppingCartLabel;
 
-    @FindBy(css="a.check_out")
+    @FindBy(css = "a.check_out")
     WebElement checkoutLink;
+
+    @FindBy(css = "span#empty_cart p b")
+    WebElement textCartEmptyMessage;
+
+    @FindBy(css = "span#empty_cart p a")
+    WebElement hereLink;
 
     public CartPage() {
         waitUntilPageObjectIsLoaded();
@@ -33,5 +39,14 @@ public class CartPage extends BasePageObject {
     public CheckoutPage clickProceedToCheckoutButton() {
         checkoutLink.click();
         return new CheckoutPage();
+    }
+
+    public String getCartIsEmptyTextMessage() {
+        return textCartEmptyMessage.getText();
+    }
+
+    public ProductPage getHereLink() {
+        hereLink.click();
+        return new ProductPage();
     }
 }

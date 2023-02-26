@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductSection extends BasePageObject {
-    private static final String TITLE_PRODUCTS = "//h2[text() = '<category> - <subcategory> Products']";
+    private String titleProducts = "//h2[text() = '<category> - <subcategory> Products']";
     private List<ProductItem> productItems;
 
     @FindBy(css = "div.features_items h2.title")
@@ -33,7 +33,7 @@ public class ProductSection extends BasePageObject {
     }
 
     public boolean existTitleProducts(String category, String subCategory) {
-        String title = TITLE_PRODUCTS.replace("<category>", category).replace("<subcategory>", subCategory);
+        String title = titleProducts.replace("<category>", category).replace("<subcategory>", subCategory);
         return driver.findElement(By.cssSelector(title)).isDisplayed();
     }
 

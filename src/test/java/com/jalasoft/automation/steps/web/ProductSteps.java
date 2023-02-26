@@ -33,7 +33,9 @@ public class ProductSteps {
         this.controller = controller;
     }
 
-    @Given("^the user is on the Products page$")
+    // "^I(?: publish a new | edit and publish the )Post with the following values$"
+    @Given("^the user (?:is on the Products page|is on the Products page and does not choose any product)$")
+    // @Given("^the user is on the Products page$")
     public void navigateToProductPage() {
         HomePage homePage = controller.getHomePage();
         productPage = homePage.getTopBarMenu().clickProductsLink();
@@ -88,7 +90,6 @@ public class ProductSteps {
 
     @Then("^the user goes to the Cart page using the Cart link$")
     public void shouldClickOnCartLink() {
-        // CartPage cartPage = controller.getHomePage().getTopBarMenuAuthenticated().clickCartLink();
         CartPage cartPage = controller.getHomePage().getTopBarMenu().clickCartLink();
         controller.setCartPage(cartPage);
     }
@@ -164,7 +165,6 @@ public class ProductSteps {
     }
 
 
-
     @Then("^the user should see that the products displayed in the Review Your Order section are the same as in Cart$")
     public void shouldProductsInReviewYourOrderAreTheSameAsInCart() {
         checkoutTableSection = checkoutPage.getCheckoutTableSection();
@@ -182,5 +182,15 @@ public class ProductSteps {
     public void shouldTheTotalAmountBeComputedCorrectly() {
         Long actualTotalAmount = Long.parseLong(checkoutTableSection.getTotalAmount().replace("Rs.", "").trim());
         Assert.assertEquals(actualTotalAmount, expectedTotalAmount);
+    }
+
+    @Then("^the user should not see products for \"(.*?)\"$")
+    public void shouldNotSeeListProducts(String productTitle) {
+        if(productSection.getProductCount() != 0) {
+            Assert.assertTrue(false, "there is/are "+ String.valueOf(productSection.getProductCount())+" product(s) for this criteria search");
+        } else {
+            Assert.assertTrue(true);
+        }
+        Assert.assertEquals(productSection.getTitleDisplaysSearchedProducts(), productTitle, "wrong page title");
     }
 }

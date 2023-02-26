@@ -15,7 +15,7 @@ public class ProductPage extends BasePageObject {
     private SearchProductSection searchProductSection;
 
     @FindBy(css = "div.features_items h2.title")
-    private WebElement titleProduct;
+    private WebElement titleAllProducts;
 
     public ProductPage() {
         waitUntilPageObjectIsLoaded();
@@ -26,7 +26,7 @@ public class ProductPage extends BasePageObject {
 
     @Override
     public void waitUntilPageObjectIsLoaded() throws WebDriverException {
-        wait.until(ExpectedConditions.visibilityOf(titleProduct));
+        wait.until(ExpectedConditions.visibilityOf(titleAllProducts));
     }
 
     public CategorySection getCategorySection() {
@@ -37,5 +37,11 @@ public class ProductPage extends BasePageObject {
         return brandSection;
     }
 
-    public SearchProductSection getSearchProductSection() { return searchProductSection; }
+    public SearchProductSection getSearchProductSection() {
+        return searchProductSection;
+    }
+
+    public String getAllProductsTitle() {
+        return titleAllProducts.getText();
+    }
 }
