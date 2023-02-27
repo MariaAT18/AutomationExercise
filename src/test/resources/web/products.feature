@@ -73,5 +73,9 @@ Feature: Product
       | Product Name                    |
       | Blue Cotton Indie Mickey Dress  |
 
-
+  @ProductInformation
+  Scenario: A user with valid account should be able to see the information of the products
+    Given the user is on the Products page
+    When the user sees the products
+    Then the user should see that each product has image, name, price, Add to cart button, and View Product link
 

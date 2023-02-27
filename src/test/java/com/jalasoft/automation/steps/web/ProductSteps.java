@@ -28,14 +28,13 @@ public class ProductSteps {
     private CheckoutPage checkoutPage;
     private CheckoutTableSection checkoutTableSection;
     private long expectedTotalAmount = 0;
+    private List<ProductItem> products;
 
     public ProductSteps(UIController controller) {
         this.controller = controller;
     }
 
-    // "^I(?: publish a new | edit and publish the )Post with the following values$"
     @Given("^the user (?:is on the Products page|is on the Products page and does not choose any product)$")
-    // @Given("^the user is on the Products page$")
     public void navigateToProductPage() {
         HomePage homePage = controller.getHomePage();
         productPage = homePage.getTopBarMenu().clickProductsLink();
@@ -51,6 +50,7 @@ public class ProductSteps {
     public void navigateToProductPageByBrand(String brand) {
         productSection = productPage.getBrandSection().clickOnBrand(brand);
     }
+
     @Given("^the user searches for a \"(.*?)\" product$")
     public void enterAValidCriteriaIntoSearchProductSearch(String criteriaSearch) {
         criteriaSearchVerify = criteriaSearch;
@@ -97,6 +97,23 @@ public class ProductSteps {
     @And("^the user presses on Proceed To Checkout button$")
     public void shouldClickOnProceedToCheckoutButton() {
         checkoutPage = controller.getCartPage().clickProceedToCheckoutButton();
+    }
+
+    @When("^the user sees the products$")
+    public void shouldTheUserSeeTheProducts() {
+        productSection = new ProductSection();
+        products = productSection.getProductItems();
+    }
+
+    @Then("^the user should see that each product has image, name, price, Add to cart button, and View Product link$")
+    public void shouldVerifyEachProduct() {
+        for (ProductItem item : products) {
+            Assert.assertTrue(item.getImage(), "wrong image does not exist");
+            Assert.assertFalse(item.getName().isEmpty(), "wrong title is empty");
+            Assert.assertFalse(item.getPrice().isEmpty(), "wrong price is empty");
+            Assert.assertTrue(item.getViewProductLink().isDisplayed(), "wrong view product link is not being displayed");
+            Assert.assertTrue(item.getAddToCartBUtton().isDisplayed(), "wrong add to cart button is not being displayed");
+        }
     }
 
     @Given("^the user presses the Continue Shopping button$")
@@ -186,8 +203,8 @@ public class ProductSteps {
 
     @Then("^the user should not see products for \"(.*?)\"$")
     public void shouldNotSeeListProducts(String productTitle) {
-        if(productSection.getProductCount() != 0) {
-            Assert.assertTrue(false, "there is/are "+ String.valueOf(productSection.getProductCount())+" product(s) for this criteria search");
+        if (productSection.getProductCount() != 0) {
+            Assert.assertTrue(false, "there is/are " + String.valueOf(productSection.getProductCount()) + " product(s) for this criteria search");
         } else {
             Assert.assertTrue(true);
         }

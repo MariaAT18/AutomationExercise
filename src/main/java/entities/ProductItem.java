@@ -10,8 +10,10 @@ public class ProductItem {
     private final WebElement addToCartBUtton;
     private String price;
     private String name;
+    private boolean image;
 
     public ProductItem(WebElement element) {
+        image = element.findElement(By.cssSelector("div.single-products div.productinfo img")).isDisplayed();
         price = element.findElement(By.cssSelector("div.single-products div.productinfo h2")).getText();
         name = element.findElement(By.cssSelector("div.single-products div.productinfo p")).getText();
         viewProductLink = element.findElement(By.cssSelector("div.choose ul li a"));
@@ -26,11 +28,16 @@ public class ProductItem {
     public String getPrice() {
         return price;
     }
-
     public String getName() {
         return name;
     }
+    public boolean getImage() {
+        return image;
+    }
 
+    public WebElement getViewProductLink() { return viewProductLink; }
+
+    public WebElement getAddToCartBUtton() { return addToCartBUtton; }
     public ProductCartPopUp clickOnAddToCartButton() {
         addToCartBUtton.click();
         return new ProductCartPopUp();
