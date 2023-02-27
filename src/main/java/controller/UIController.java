@@ -14,7 +14,7 @@ public class UIController {
     private ProductCartPopUp productCartPopUp;
     private ViewProductPage viewProductPage;
     private List<Map<String, Object>> products;
-    private String userName;
+
     public HomePage getHomePage() {
         return homePage;
     }
@@ -53,12 +53,5 @@ public class UIController {
 
     public void setProducts(List<Map<String, Object>> products) {
         this.products = products;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 }

@@ -10,8 +10,8 @@ Feature: Product
     Examples:
       | Category         | Subcategory      |  ProductTitle                   |  ProductCount  |
       | Women            | Dress            |  WOMEN - DRESS PRODUCTS         |   3            |
-      #| Men              | Jeans            |  MEN - JEANS PRODUCTS           |   3            |
-      #| Kids             | Tops & Shirts    |  KIDS - TOPS & SHIRTS PRODUCTS  |   7            |
+      | Men              | Jeans            |  MEN - JEANS PRODUCTS           |   3            |
+      | Kids             | Tops & Shirts    |  KIDS - TOPS & SHIRTS PRODUCTS  |   7            |
 
   @ProductsBrand
   Scenario Outline: A user with valid account should be able a search products by brand
@@ -23,8 +23,8 @@ Feature: Product
     Examples:
       | Brand Name     |  Product Count  | Product Title             |
       | Polo           |  6              | BRAND - POLO PRODUCTS     |
-      #| Babyhug        |  4              | BRAND - BABYHUG PRODUCTS  |
-      #| Madame         |  5              | BRAND - MADAME PRODUCTS   |
+      | Babyhug        |  4              | BRAND - BABYHUG PRODUCTS  |
+      | Madame         |  5              | BRAND - MADAME PRODUCTS   |
 
   @ProductsValidCriteria
   Scenario Outline: A user with valid account should be able a find products in Search Product search
@@ -36,9 +36,7 @@ Feature: Product
     Examples:
       | Word Search     | Product Count   |
       | pink                | 6               |
-      #| tshirts             | 6               |
-      #| saree               | 3               |
-      #| dress               | 9               |
+      | saree               | 3               |
 
   @ProductsInvalidCriteria
   Scenario Outline: A user with valid account should not be able a find products with invalid criteria of search
@@ -60,8 +58,8 @@ Feature: Product
     Examples:
       | Product Name                   | Category        | Price    | Availability | Condition  | Brand        |
       | Blue Cotton Indie Mickey Dress  | Kids > Dress    | 1530     | In Stock     | New        | Biba         |
-      #| Rust Red Linen Saree            | Women > Saree   | 3500     | In Stock     | New        | Biba         |
-      #| Sleeveless Dress                | Women > Dress   | 1000     | In Stock     | New        | Madame       |
+      | Rust Red Linen Saree            | Women > Saree   | 3500     | In Stock     | New        | Biba         |
+      | Sleeveless Dress                | Women > Dress   | 1000     | In Stock     | New        | Madame       |
 
   @ProductAddToCart
   Scenario Outline: A user with valid account should be able to add a product to the Cart

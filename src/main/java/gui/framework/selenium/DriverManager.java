@@ -14,6 +14,9 @@ import org.openqa.selenium.support.ui.Wait;
 import utils.LoggerManager;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,13 +39,22 @@ public class DriverManager {
         return instance;
     }
 
+    private File getChromeExtensionFile() {
+        URL resource = DriverManager.class.getClassLoader().getResource("extensions/ublock.crx");
+        try {
+            return Paths.get(resource.toURI()).toFile();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void initialize() {
         log.info("Initializing Selenium WebDriver Manager");
         switch (driverConfig.getBrowser()) {
             case DomainAppConstants.CHROME:
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                chromeOptions.addExtensions(new File("ublock.crx"));
+                chromeOptions.addExtensions(getChromeExtensionFile());
                 chromeOptions.setExperimentalOption("useAutomationExtension", false);
                 chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 
@@ -53,7 +65,7 @@ public class DriverManager {
                 chromeOptions.setExperimentalOption("prefs", prefs);
 
                 if (driverConfig.getHeadlessMode()) {
-                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--headless=new");
                 }
                 driver = new ChromeDriver(chromeOptions);
                 break;
@@ -63,7 +75,7 @@ public class DriverManager {
                 edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 edgeOptions.setExperimentalOption("useAutomationExtension", false);
                 edgeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-
+                edgeOptions.addExtensions(getChromeExtensionFile());
                 edgeOptions.addArguments("--password-store=basic");
                 Map<String, Object> prefss = new HashMap<String, Object>();
                 prefss.put("credentials_enable_service", false);
@@ -80,6 +92,7 @@ public class DriverManager {
             case DomainAppConstants.FIREFOX:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
                 firefoxOptions.setLogLevel(FirefoxDriverLogLevel.FATAL);
 
                 firefoxOptions.addArguments("--password-store=basic");

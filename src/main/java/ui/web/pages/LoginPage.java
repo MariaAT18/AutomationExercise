@@ -11,7 +11,6 @@ import utils.LoggerManager;
 
 public class LoginPage extends BasePageObject {
     private static final LoggerManager log = LoggerManager.getInstance();
-    // private UIController controller;
     public TopBarMenu topBarMenu;
 
     @FindBy(name = "email")
@@ -49,10 +48,6 @@ public class LoginPage extends BasePageObject {
         passwordUserTextBox.sendKeys(passwordUser);
     }
 
-    public String getErrorMessage() {
-        return errorMessage.getText();
-    }
-
     public void clickLoginButton() {
         loginSubmitButton.submit();
     }
@@ -60,8 +55,6 @@ public class LoginPage extends BasePageObject {
     public HomePage loginWithProfileUser(String user) {
         String email = EnvironmentManager.getInstance().getEmail(user);
         String password = EnvironmentManager.getInstance().getPassword(user);
-        String userName = EnvironmentManager.getInstance().getUsername(user);
-        // controller.setUserName(userName);
         setEmailUserTextBox(email);
         setPasswordUserTextBox(password);
         clickLoginButton();

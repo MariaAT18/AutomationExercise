@@ -13,8 +13,8 @@ Feature: Cart
     Examples:
       | Product Name     | Price               | Quantity        | Total             |
       | Blue Top         | Rs. 500             | 1               | Rs. 500           |
-      #| Men Tshirt       | Rs. 400             | 1               | Rs. 400           |
-      #| Stylish Dress    | Rs. 1500            | 1               | Rs. 1500          |
+      | Men Tshirt       | Rs. 400             | 1               | Rs. 400           |
+      | Stylish Dress    | Rs. 1500            | 1               | Rs. 1500          |
 
   @AddSameProductCart
   Scenario Outline: A same product is added to Cart with a different quantity then Shopping Cart page displays this product with the quantity and price updated.
@@ -31,7 +31,7 @@ Feature: Cart
     Examples:
       | Product Name          | Add Quantity     | Price      | Expected Quantity   | Total          |
       | Blue Top              | 4                | Rs. 500    |      5              | Rs. 2500       |
-      #| Soft Stretch Jeans    | 8                | Rs. 799    |      9              | Rs. 7191       |
+      | Soft Stretch Jeans    | 8                | Rs. 799    |      9              | Rs. 7191       |
 
   @RemoveProductFromCartPage
   Scenario Outline: A user with valid account should be able to remove a product from the cart information table.
@@ -44,7 +44,7 @@ Feature: Cart
     Examples:
       | Product Name     |
       | Blue Top         |
-      #| Winter Top       |
+      | Winter Top       |
 
   @SameProductInCheckout
   Scenario: A user with valid account should be able to verify that the products choose previously are the same in Checkout page
